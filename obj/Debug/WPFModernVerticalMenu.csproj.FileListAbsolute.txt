@@ -26,3 +26,33 @@ C:\Users\JEYDERHT\Desktop\UI Controls\WPFModernVerticalMenu\obj\Debug\Pages\Home
 C:\Users\JEYDERHT\Desktop\UI Controls\WPFModernVerticalMenu\obj\Debug\Pages\Home.baml
 C:\Users\JEYDERHT\Desktop\UI Controls\WPFModernVerticalMenu\obj\Debug\Pages\Dashboard.g.cs
 C:\Users\JEYDERHT\Desktop\UI Controls\WPFModernVerticalMenu\obj\Debug\Pages\Dashboard.baml
+C:\Users\c.wonga\Source\Repos\WPFModernVerticalMen\bin\Debug\WPFModernVerticalMenu.exe.config
+C:\Users\c.wonga\Source\Repos\WPFModernVerticalMen\bin\Debug\WPFModernVerticalMenu.exe
+C:\Users\c.wonga\Source\Repos\WPFModernVerticalMen\bin\Debug\WPFModernVerticalMenu.pdb
+C:\Users\c.wonga\Source\Repos\WPFModernVerticalMen\obj\Debug\WPFModernVerticalMenu.csproj.AssemblyReference.cache
+C:\Users\c.wonga\Source\Repos\WPFModernVerticalMen\obj\Debug\Controls\MenuItem.g.cs
+C:\Users\c.wonga\Source\Repos\WPFModernVerticalMen\obj\Debug\Controls\UserPopup.g.cs
+C:\Users\c.wonga\Source\Repos\WPFModernVerticalMen\obj\Debug\MainWindow.g.cs
+C:\Users\c.wonga\Source\Repos\WPFModernVerticalMen\obj\Debug\Pages\Extractor.g.cs
+C:\Users\c.wonga\Source\Repos\WPFModernVerticalMen\obj\Debug\Pages\SelectSupplier.g.cs
+C:\Users\c.wonga\Source\Repos\WPFModernVerticalMen\obj\Debug\Pages\Home.g.cs
+C:\Users\c.wonga\Source\Repos\WPFModernVerticalMen\obj\Debug\App.g.cs
+C:\Users\c.wonga\Source\Repos\WPFModernVerticalMen\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\c.wonga\Source\Repos\WPFModernVerticalMen\obj\Debug\WPFModernVerticalMenu_MarkupCompile.cache
+C:\Users\c.wonga\Source\Repos\WPFModernVerticalMen\obj\Debug\WPFModernVerticalMenu_MarkupCompile.lref
+C:\Users\c.wonga\Source\Repos\WPFModernVerticalMen\obj\Debug\App.baml
+C:\Users\c.wonga\Source\Repos\WPFModernVerticalMen\obj\Debug\Assets\Icons.baml
+C:\Users\c.wonga\Source\Repos\WPFModernVerticalMen\obj\Debug\Controls\MenuItem.baml
+C:\Users\c.wonga\Source\Repos\WPFModernVerticalMen\obj\Debug\Controls\UserPopup.baml
+C:\Users\c.wonga\Source\Repos\WPFModernVerticalMen\obj\Debug\MainWindow.baml
+C:\Users\c.wonga\Source\Repos\WPFModernVerticalMen\obj\Debug\Pages\Extractor.baml
+C:\Users\c.wonga\Source\Repos\WPFModernVerticalMen\obj\Debug\Pages\SelectSupplier.baml
+C:\Users\c.wonga\Source\Repos\WPFModernVerticalMen\obj\Debug\Pages\Home.baml
+C:\Users\c.wonga\Source\Repos\WPFModernVerticalMen\obj\Debug\Styles\MainStyle.baml
+C:\Users\c.wonga\Source\Repos\WPFModernVerticalMen\obj\Debug\Themes\DarkTheme.baml
+C:\Users\c.wonga\Source\Repos\WPFModernVerticalMen\obj\Debug\WPFModernVerticalMenu.g.resources
+C:\Users\c.wonga\Source\Repos\WPFModernVerticalMen\obj\Debug\WPFModernVerticalMenu.Properties.Resources.resources
+C:\Users\c.wonga\Source\Repos\WPFModernVerticalMen\obj\Debug\WPFModernVerticalMenu.csproj.GenerateResource.cache
+C:\Users\c.wonga\Source\Repos\WPFModernVerticalMen\obj\Debug\WPFModernVerticalMenu.csproj.CoreCompileInputs.cache
+C:\Users\c.wonga\Source\Repos\WPFModernVerticalMen\obj\Debug\WPFModernVerticalMenu.exe
+C:\Users\c.wonga\Source\Repos\WPFModernVerticalMen\obj\Debug\WPFModernVerticalMenu.pdb

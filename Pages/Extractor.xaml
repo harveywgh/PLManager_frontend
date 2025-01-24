@@ -1,0 +1,136 @@
+﻿<Page x:Class="WPFModernVerticalMenu.Pages.Extractor"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:viewModels="clr-namespace:WPFModernVerticalMenu.ViewModels"
+      xmlns:controls="clr-namespace:WPFModernVerticalMenu.Controls"
+      mc:Ignorable="d" 
+      Title="Extraction PL"
+      FontFamily="Corbel">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Styles/MainStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Page.DataContext>
+        <viewModels:PackingListViewModel/>
+    </Page.DataContext>
+
+    <Grid>
+        <Border CornerRadius="10" Background="{DynamicResource FourthBackgroundColor}" Margin="30,0,30,30">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="Importer une Packing List" FontSize="20" Foreground="{DynamicResource TextFifthColor}" 
+                           FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+
+                <!-- Zone de glisser-déposer cliquable -->
+                <Button Style="{StaticResource PopupButtonStyle}" 
+                    Command="{Binding SelectFileCommand}"
+                    Width="600" Height="350" Background="Gainsboro" BorderThickness="0">
+                    <Grid Width="600" Height="350" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <!-- Contour en pointillés -->
+                        <Border BorderBrush="Gray" BorderThickness="1.5" CornerRadius="5"
+                            Background="#fbfbff">
+                            <Border.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="BorderBrush">
+                                        <Setter.Value>
+                                            <VisualBrush TileMode="Tile" Viewport="0,0,10,5" ViewportUnits="Absolute">
+                                                <VisualBrush.Visual>
+                                                    <Rectangle Width="6" Height="1" Fill="Gray"/>
+                                                </VisualBrush.Visual>
+                                            </VisualBrush>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Border.Resources>
+                        </Border>
+
+                        <!-- Contenu de la zone de glisser-déposer -->
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Path Data="{DynamicResource clouduploadIcon}" 
+                              Width="57" 
+                              Height="44" 
+                              Fill="{DynamicResource PrimaryBlueColor}" 
+                              Stretch="Fill"
+                              Margin="0,0,0,0"/>
+                            <StackPanel HorizontalAlignment="Center">
+                                <TextBlock FontSize="16" FontWeight="SemiBold" TextAlignment="Center">
+                    <LineBreak/>
+                    <Run Text="Déposer la Packing List ou " Foreground="{DynamicResource TextFifthColor}"/>
+                    <Run Text="parcourir" 
+                         Foreground="{DynamicResource PrimaryBlueColor}" 
+                         TextDecorations="Underline"/>
+                                </TextBlock>
+                                <TextBlock Foreground="Gray" FontSize="13" TextAlignment="Center">
+                    Formats supportés : XLS, XLSX
+                                </TextBlock>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </Button>
+
+                <!-- Message de succès après import -->
+                <Border Visibility="{Binding IsFileUploaded, Converter={StaticResource BoolToVisibilityConverter}}">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Path Data="{DynamicResource checkIcon}" 
+                          Width="57" 
+                          Height="44" 
+                          Fill="Green" 
+                          Stretch="Fill"/>
+                            <TextBlock Text="Packing List importée avec succès!" 
+                               Foreground="Green"
+                               FontSize="16" 
+                               HorizontalAlignment="Center"/>
+                    </StackPanel>
+                    <Border.Triggers>
+                        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.5"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Border.Triggers>
+                </Border>
+
+
+                <!-- Bouton stylisé -->
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Contenu principal -->
+                    <StackPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <!-- Contenu de ta page -->
+                    </StackPanel>
+
+                    <!-- Bouton Suivant en bas à droite -->
+                    <Button Content="Suivant"
+            Style="{StaticResource SquareButtonStyle}"
+            Width="200" Height="40"
+            FontSize="14"
+            FontWeight="SemiBold"
+            Margin="0, 25, 0, 0"
+            Grid.Row="1" 
+            Grid.Column="1"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Command="{Binding GoToNextPageCommand}"/>
+                </Grid>
+
+            </StackPanel>
+        </Border>
+    </Grid>
+
+</Page>
