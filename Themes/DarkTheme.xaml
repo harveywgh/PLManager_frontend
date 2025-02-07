@@ -3,17 +3,22 @@
                     xmlns:local="clr-namespace:WPFModernVerticalMenu.Themes">
 
     <!-- Background Colors -->
-    <SolidColorBrush x:Key="PrimaryBackgroundColor" Color="#131725"/>
-    <SolidColorBrush x:Key="SecundaryBackgroundColor" Color="#1d2335"/>
+    <SolidColorBrush x:Key="PrimaryBackgroundColor" Color="#e4e6e7"/>
+    <SolidColorBrush x:Key="SecundaryBackgroundColor" Color="#121212"/>
+    <SolidColorBrush x:Key="TertiaryBackgroundColor" Color="#c4c4c5"/>
+    <SolidColorBrush x:Key="FourthBackgroundColor" Color="#FFFFFF"/>
 
     <!-- Primary Colors -->
-    <SolidColorBrush x:Key="PrimaryBlueColor" Color="#3772FF"/>
+    <SolidColorBrush x:Key="PrimaryBlueColor" Color="#406442"/>
+    <SolidColorBrush x:Key="SecondaryBlueColor" Color="#3d4a3d"/>
+    <SolidColorBrush x:Key="DarkBlueColor" Color="#3d4a3d"/>
 
     <!-- Typograhy Colors -->
     <SolidColorBrush x:Key="PrimaryTextColor" Color="#FFFFFF"/>
     <SolidColorBrush x:Key="TextSecundaryColor" Color="#B0B7C3"/>
     <SolidColorBrush x:Key="TextTertiaryColor" Color="#8A94A6"/>
     <SolidColorBrush x:Key="TextFourthColor" Color="#4B5D78"/>
+    <SolidColorBrush x:Key="TextFifthColor" Color="#121212"/>
 
     <!-- Icon Colors -->
     <SolidColorBrush x:Key="PrimaryIconColor" Color="#B0B7C3"/>

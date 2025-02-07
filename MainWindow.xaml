@@ -8,8 +8,10 @@
         mc:Ignorable="d" Name="home"
         Title="MainWindow" Height="650" Width="1000"
         WindowStartupLocation="CenterScreen" WindowStyle="None"
-        Background="Transparent" AllowsTransparency="True"
-        ResizeMode="NoResize" FontFamily="Poppins">
+        Background="Transparent" 
+        AllowsTransparency="True"
+        ResizeMode="NoResize" 
+        FontFamily="Corbel">
 
         <!-- By Jeyderht 
         Subscribe: https://www.youtube.com/channel/UC9di50E_9m9pQcZPxzFqYUA/about
@@ -37,14 +39,14 @@
                               Width="32" Height="24"
                               HorizontalAlignment="Left">
                             <Border.Background>
-                                <ImageBrush ImageSource="Resources/logo.png" Stretch="Uniform"/>
+                                <ImageBrush ImageSource="Resources/logoblanc.png" Stretch="Uniform"/>
                             </Border.Background>
                         </Border>
                         
-                        <Label Content="Poppins"
+                        <Label Content="PL MANAGER"
                                Foreground="{DynamicResource PrimaryTextColor}"
                                FontWeight="Bold"
-                               FontSize="16"
+                               FontSize="14"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Left"
                                Margin="60 0 0 0"/>
@@ -53,31 +55,19 @@
                     <!-- Start: MenuItem -->
                     <StackPanel Grid.Row="1" Margin="-1 40 0 20">
                         <Button x:Name="btnHome" Style="{DynamicResource PopupButtonStyle}"  MouseEnter="btnHome_MouseEnter" MouseLeave="btnHome_MouseLeave" Click="btnHome_Click">
-                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource home}" IconWidth="16" Text="Home" VerticalAlignment="Center"/>
+                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryGreenColor}" Icon="{DynamicResource home}" IconWidth="16" Text="Tableau de bord" VerticalAlignment="Center"/>
                         </Button>
                         <Button x:Name="btnDashboard" Style="{DynamicResource PopupButtonStyle}"  MouseEnter="btnDashboard_MouseEnter" MouseLeave="btnDashboard_MouseLeave" Click="btnDashboard_Click">
-                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource dashboard}" IconWidth="16" Text="Dashboard" VerticalAlignment="Center"/>
+                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryGreenColor}" Icon="{DynamicResource uploadIcon}" IconWidth="16" Text="Extraction PL" VerticalAlignment="Center"/>
                         </Button>
                         <Button x:Name="btnProducts" Style="{DynamicResource PopupButtonStyle}"  MouseEnter="btnProducts_MouseEnter" MouseLeave="btnProducts_MouseLeave">
-                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource products}" IconWidth="16" Text="Products" VerticalAlignment="Center"/>
+                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryGreenColor}" Icon="{DynamicResource faqConversationIcon}" IconWidth="16" Text="FAQ" VerticalAlignment="Center"/>
                         </Button>
                         <Button x:Name="btnProductStock" Style="{DynamicResource PopupButtonStyle}"  MouseEnter="btnProductStock_MouseEnter" MouseLeave="btnProductStock_MouseLeave">
-                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource products}" IconWidth="16" Text="Product Stock" VerticalAlignment="Center"/>
+                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryGreenColor}" Icon="{DynamicResource settings}" IconWidth="16" Text="Réglages" VerticalAlignment="Center"/>
                         </Button>
                         <Button x:Name="btnOrderList" Style="{DynamicResource PopupButtonStyle}"  MouseEnter="btnOrderList_MouseEnter" MouseLeave="btnOrderList_MouseLeave">
-                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource email}" IconWidth="16" Text="Order List" VerticalAlignment="Center"/>
-                        </Button>
-                        <Button x:Name="btnBilling" Style="{DynamicResource PopupButtonStyle}"  MouseEnter="btnBilling_MouseEnter" MouseLeave="btnBilling_MouseLeave">
-                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource billing}" IconWidth="16" Text="Billing" VerticalAlignment="Center"/>
-                        </Button>
-                        <Button x:Name="btnPointOfSale" Style="{DynamicResource PopupButtonStyle}"  MouseEnter="btnPointOfSale_MouseEnter" MouseLeave="btnPointOfSale_MouseLeave">
-                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource car}" IconWidth="16" Text="Point Of Sale" VerticalAlignment="Center"/>
-                        </Button>
-                        <Button x:Name="btnSecurity" Style="{DynamicResource PopupButtonStyle}"  MouseEnter="btnSecurity_MouseEnter" MouseLeave="btnSecurity_MouseLeave">
-                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource lock}" IconWidth="16" Text="Security" VerticalAlignment="Center"/>
-                        </Button>
-                        <Button x:Name="btnSetting" Style="{DynamicResource PopupButtonStyle}"  MouseEnter="btnSetting_MouseEnter" MouseLeave="btnSetting_MouseLeave">
-                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Icon="{DynamicResource settings}" IconWidth="16" Text="Setting" VerticalAlignment="Center"/>
+                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryGreenColor}" Icon="{DynamicResource helpIcon}" IconWidth="16" Text="Aide" VerticalAlignment="Center"/>
                         </Button>
                     </StackPanel>
                     <!-- End: MenuItem -->
