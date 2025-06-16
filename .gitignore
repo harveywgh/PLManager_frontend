@@ -1,0 +1,10 @@
+.vs/
+obj/
+bin/
+packages/
+*.user
+*.suo
+*.pdb
+*.db
+*.vsidx
+*.cache
