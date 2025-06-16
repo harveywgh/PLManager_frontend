@@ -1,0 +1,123 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\c.wonga\\source\\repos\\PLManager\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A3046A9B-3166-4C71-8845-A664105D1D5E}|PLManager.csproj|C:\\Users\\c.wonga\\source\\repos\\PLManager\\services\\apiclientservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A3046A9B-3166-4C71-8845-A664105D1D5E}|PLManager.csproj|solutionrelative:services\\apiclientservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A3046A9B-3166-4C71-8845-A664105D1D5E}|PLManager.csproj|C:\\Users\\c.wonga\\source\\repos\\PLManager\\services\\apiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A3046A9B-3166-4C71-8845-A664105D1D5E}|PLManager.csproj|solutionrelative:services\\apiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A3046A9B-3166-4C71-8845-A664105D1D5E}|PLManager.csproj|C:\\Users\\c.wonga\\source\\repos\\PLManager\\viewmodels\\selectsupplierviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A3046A9B-3166-4C71-8845-A664105D1D5E}|PLManager.csproj|solutionrelative:viewmodels\\selectsupplierviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A3046A9B-3166-4C71-8845-A664105D1D5E}|PLManager.csproj|c:\\users\\c.wonga\\source\\repos\\plmanager\\viewmodels\\packinglistviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A3046A9B-3166-4C71-8845-A664105D1D5E}|PLManager.csproj|solutionrelative:viewmodels\\packinglistviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A3046A9B-3166-4C71-8845-A664105D1D5E}|PLManager.csproj|C:\\Users\\c.wonga\\source\\repos\\PLManager\\pages\\csvsettingspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{A3046A9B-3166-4C71-8845-A664105D1D5E}|PLManager.csproj|solutionrelative:pages\\csvsettingspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A3046A9B-3166-4C71-8845-A664105D1D5E}|PLManager.csproj|C:\\Users\\c.wonga\\source\\repos\\PLManager\\styles\\mainstyle.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{A3046A9B-3166-4C71-8845-A664105D1D5E}|PLManager.csproj|solutionrelative:styles\\mainstyle.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 1,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedHeight": 382,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "MainStyle.xaml",
+              "DocumentMoniker": "C:\\Users\\c.wonga\\source\\repos\\PLManager\\Styles\\MainStyle.xaml",
+              "RelativeDocumentMoniker": "Styles\\MainStyle.xaml",
+              "ToolTip": "C:\\Users\\c.wonga\\source\\repos\\PLManager\\Styles\\MainStyle.xaml",
+              "RelativeToolTip": "Styles\\MainStyle.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-05-28T11:06:27.468Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PackingListViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\c.wonga\\source\\repos\\PLManager\\ViewModels\\PackingListViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\PackingListViewModel.cs",
+              "ToolTip": "C:\\Users\\c.wonga\\source\\repos\\PLManager\\ViewModels\\PackingListViewModel.cs",
+              "RelativeToolTip": "ViewModels\\PackingListViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC0AAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-04T14:34:46.914Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "SelectSupplierViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\c.wonga\\source\\repos\\PLManager\\ViewModels\\SelectSupplierViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\SelectSupplierViewModel.cs",
+              "ToolTip": "C:\\Users\\c.wonga\\source\\repos\\PLManager\\ViewModels\\SelectSupplierViewModel.cs",
+              "RelativeToolTip": "ViewModels\\SelectSupplierViewModel.cs",
+              "ViewState": "AgIAAEUAAAAAAAAAAAAkwFYAAABTAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-28T11:16:25.427Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ApiService.cs",
+              "DocumentMoniker": "C:\\Users\\c.wonga\\source\\repos\\PLManager\\Services\\ApiService.cs",
+              "RelativeDocumentMoniker": "Services\\ApiService.cs",
+              "ToolTip": "C:\\Users\\c.wonga\\source\\repos\\PLManager\\Services\\ApiService.cs",
+              "RelativeToolTip": "Services\\ApiService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-28T11:15:06.124Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ApiClientService.cs",
+              "DocumentMoniker": "C:\\Users\\c.wonga\\source\\repos\\PLManager\\Services\\ApiClientService.cs",
+              "RelativeDocumentMoniker": "Services\\ApiClientService.cs",
+              "ToolTip": "C:\\Users\\c.wonga\\source\\repos\\PLManager\\Services\\ApiClientService.cs",
+              "RelativeToolTip": "Services\\ApiClientService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-28T11:15:01.671Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CSVSettingsPage.xaml",
+              "DocumentMoniker": "C:\\Users\\c.wonga\\source\\repos\\PLManager\\Pages\\CSVSettingsPage.xaml",
+              "RelativeDocumentMoniker": "Pages\\CSVSettingsPage.xaml",
+              "ToolTip": "C:\\Users\\c.wonga\\source\\repos\\PLManager\\Pages\\CSVSettingsPage.xaml",
+              "RelativeToolTip": "Pages\\CSVSettingsPage.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-05-28T11:13:16.293Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

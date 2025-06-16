@@ -9,6 +9,13 @@ namespace WPFModernVerticalMenu.Services
     public class ApiService
     {
         private readonly HttpClient _httpClient;
+<<<<<<< Updated upstream
+=======
+        private readonly string _apiUrl = "http://192.168.1.2:8890/api/health-check"; 
+        private readonly DispatcherTimer _timer;
+
+        public event Action<string, SolidColorBrush> ApiStatusChanged;
+>>>>>>> Stashed changes
 
         public ApiService()
         {
@@ -30,6 +37,7 @@ namespace WPFModernVerticalMenu.Services
 
             try
             {
+<<<<<<< Updated upstream
                 HttpResponseMessage response = await _httpClient.PostAsync(apiUrl, formData);
                 response.EnsureSuccessStatusCode();
 
@@ -45,7 +53,27 @@ namespace WPFModernVerticalMenu.Services
             {
                 MessageBox.Show($"Erreur : {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
                 return null;
+=======
+                HttpResponseMessage response = await _httpClient.GetAsync(_apiUrl);
+                if (response.IsSuccessStatusCode)
+                {
+                    ApiStatusChanged?.Invoke("✅ API OK", new SolidColorBrush(Colors.Green));
+                }
+                else
+                {
+                    ApiStatusChanged?.Invoke($"❌ API Erreur ({response.StatusCode})", new SolidColorBrush(Colors.Red));
+                }
+            }
+            catch (HttpRequestException)
+            {
+                ApiStatusChanged?.Invoke("❌ Connexion perdue avec l'API.", new SolidColorBrush(Colors.Red));
+            }
+            catch (Exception ex)
+            {
+                ApiStatusChanged?.Invoke($"❌ Erreur API: {ex.Message}", new SolidColorBrush(Colors.Red));
+>>>>>>> Stashed changes
             }
         }
+
     }
 }

@@ -1,0 +1,36 @@
+﻿<Page x:Class="PLManager.Pages.Veditor"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Veditor">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- ✅ Boutons -->
+        <StackPanel Orientation="Horizontal" Margin="10">
+            <Button Content="Importer CSV" Width="120" Margin="0,0,10,0" Click="ImportCsv_Click"/>
+            <Button Content="Enregistrer CSV" Width="120" Click="SaveCsv_Click"/>
+        </StackPanel>
+
+        <!-- ✅ Tableur -->
+        <DataGrid x:Name="ExcelGrid"
+                  Grid.Row="1"
+                  Margin="10"
+                  AutoGenerateColumns="True"
+                  CanUserAddRows="True"
+                  CanUserDeleteRows="True"
+                  IsReadOnly="False"
+                  SelectionUnit="Cell"
+                  SelectionMode="Extended"
+                  ClipboardCopyMode="IncludeHeader"
+                  Background="White"
+                  GridLinesVisibility="All"
+                  AlternatingRowBackground="LightGray"
+                  HeadersVisibility="All"
+                  PreviewKeyDown="ExcelGrid_PreviewKeyDown"/>
+    </Grid>
+</Page>

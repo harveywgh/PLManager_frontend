@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Squirrel;
 
 namespace WPFModernVerticalMenu
 {
@@ -13,5 +14,12 @@ namespace WPFModernVerticalMenu
     /// </summary>
     public partial class App : Application
     {
+        private async void CheckForUpdates()
+        {
+            using (var mgr = new UpdateManager("https://mon-serveur.com/releases"))
+            {
+                await mgr.UpdateApp();
+            }
+        }
     }
 }

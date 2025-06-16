@@ -1,0 +1,133 @@
+﻿<Page x:Class="WPFModernVerticalMenu.Pages.LoadingPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+      Title="Chargement en cours"
+      FontFamily="Corbel">
+
+    <Page.Resources>
+        <!-- ✅ Animation de rebond -->
+        <Storyboard x:Key="CheckAnimation">
+            <DoubleAnimation Storyboard.TargetName="CheckScale"
+                             Storyboard.TargetProperty="ScaleX"
+                             From="0" To="1" Duration="0:0:1.5">
+                <DoubleAnimation.EasingFunction>
+                    <BounceEase Bounces="2" Bounciness="3"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="CheckScale"
+                             Storyboard.TargetProperty="ScaleY"
+                             From="0" To="1" Duration="0:0:1.5">
+                <DoubleAnimation.EasingFunction>
+                    <BounceEase Bounces="2" Bounciness="3"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+    </Page.Resources>
+
+    <Grid>
+        <Border CornerRadius="10" Background="{DynamicResource FourthBackgroundColor}" Margin="30,0,30,30">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="450">
+
+                <!-- ✅ Loader (Affiché pendant le traitement) -->
+                <Grid x:Name="LoadingGrid" Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}}">
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <controls:ProgressRing Style="{StaticResource CircularLoaderStyle}"/>
+                        <TextBlock Text="Traitement en cours..." FontSize="16" FontWeight="Bold" Foreground="Gray" 
+                                   Margin="0,10,0,0" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Grid>
+
+                <!-- ✅ Succès (Affiché après le traitement) -->
+                <Grid x:Name="SuccessGrid" Visibility="{Binding IsSuccess, Converter={StaticResource BoolToVisibilityConverter}}">
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+
+                        <!-- ✅ Icône Check avec Animation -->
+                        <Viewbox Width="60" Height="60" RenderTransformOrigin="0.5,0.5">
+                            <Viewbox.RenderTransform>
+                                <ScaleTransform x:Name="CheckScale" ScaleX="0" ScaleY="0"/>
+                            </Viewbox.RenderTransform>
+                            <Path Data="{StaticResource checkIcon2}" Fill="{DynamicResource PrimaryBlueColor}"/>
+                        </Viewbox>
+
+                        <!-- ✅ Texte Succès -->
+                        <TextBlock Text="Votre Packing List a été traitée avec succès !" 
+                                   FontSize="16" FontWeight="Bold" 
+                                   Foreground="{DynamicResource PrimaryBlueColor}" Margin="10,20,10,10" HorizontalAlignment="Center"/>
+
+
+                        <!-- ✅ Bouton Visualiser -->
+                        <Button Content="Visualiser"
+                                Style="{StaticResource SquareButtonStyle}"
+                                Background="{DynamicResource PrimaryBlueColor}"
+                                Width="200" Height="40"
+                                FontSize="14"
+                                FontWeight="SemiBold"
+                                Margin="0,0,0,15"
+                                Click="btnVisualiser_Click"/>
+                        
+                        
+                        <!-- ✅ Bouton Fermer -->
+                        <Button Content="Fermer"
+                                Style="{StaticResource SquareButtonStyle}"
+                                Background="#171717"
+                                Width="200" Height="40"
+                                FontSize="14"
+                                FontWeight="SemiBold"
+                                Click="btnDashboard_Click"/>
+                    </StackPanel>
+
+                    <!-- ✅ Ajout du Trigger dans `Grid.Triggers` -->
+                    <Grid.Triggers>
+                        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                            <BeginStoryboard Storyboard="{StaticResource CheckAnimation}"/>
+                        </EventTrigger>
+                    </Grid.Triggers>
+
+                </Grid>
+
+                <!-- ❌ Échec (Affiché en cas d'erreur) -->
+                <Grid x:Name="ErrorGrid" Visibility="{Binding IsError, Converter={StaticResource BoolToVisibilityConverter}}">
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+
+                        <!-- ❌ Icône Erreur animée -->
+                        <Viewbox Width="60" Height="60" RenderTransformOrigin="0.5,0.5">
+                            <Viewbox.RenderTransform>
+                                <ScaleTransform x:Name="ErrorScale" ScaleX="0" ScaleY="0"/>
+                            </Viewbox.RenderTransform>
+                            <!-- Icône croix (rond + X) -->
+                            <Grid>
+                                <Ellipse Width="60" Height="60" Fill="#E74C3C"/>
+                                <Path Data="M 15 15 L 45 45 M 45 15 L 15 45" Stroke="White" StrokeThickness="4" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
+                            </Grid>
+                        </Viewbox>
+
+                        <!-- ❌ Message d'erreur -->
+                        <TextBlock Text="Une erreur est survenue pendant l'extraction."
+                   FontSize="16" FontWeight="Bold"
+                   Foreground="#E74C3C" Margin="10,20,10,10"
+                   TextAlignment="Center" TextWrapping="Wrap"/>
+
+                        <!-- 🔁 Bouton Retour -->
+                        <Button Content="Retour"
+                Style="{StaticResource SquareButtonStyle}"
+                Background="#171717"
+                Width="200" Height="40"
+                FontSize="14"
+                FontWeight="SemiBold"
+                Click="btnDashboard_Click"/>
+                    </StackPanel>
+
+                    <!-- 🎬 Animation croix rouge -->
+                    <Grid.Triggers>
+                        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                            <BeginStoryboard Storyboard="{StaticResource ErrorAnimation}"/>
+                        </EventTrigger>
+                    </Grid.Triggers>
+                </Grid>
+
+
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>
