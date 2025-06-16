@@ -1,15 +1,7 @@
-<<<<<<< Updated upstream
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-=======
-﻿using System.IO;
+using System.IO;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
->>>>>>> Stashed changes
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -27,7 +19,6 @@ using WPFModernVerticalMenu.ViewModels;
 using PL_Manager.Pages;
 using PLManager.Pages;
 using PLManager.Windows;
->>>>>>> Stashed changes
 
 namespace WPFModernVerticalMenu
 {
@@ -148,11 +139,7 @@ namespace WPFModernVerticalMenu
                 Popup.PlacementTarget = btnHome;
                 Popup.Placement = PlacementMode.Right;
                 Popup.IsOpen = true;
-<<<<<<< Updated upstream
-                Header.PopupText.Text = "Tableau de bord";
-=======
                 Header.PopupText.Text = ApiStatusText;
->>>>>>> Stashed changes
             }
         }
 
@@ -285,6 +272,12 @@ namespace WPFModernVerticalMenu
             win.Show(); 
         }
 
+        private void btnLocalEditor_Click(object sender, RoutedEventArgs e)
+        {
+            var win = new PLManager.Windows.EditorWindow();
+            win.Show(); 
+        }
+
 
         // ✅ Navigation dans l'application
         public void btnSelectSupplier_Click(object sender, EventArgs e)
@@ -293,6 +286,11 @@ namespace WPFModernVerticalMenu
 
 <<<<<<< Updated upstream
 =======
+        public void GoToCSVSettings_Click(object sender, EventArgs e)
+        {
+            fContainer.Navigate(new Uri("Pages/CSVSettingsPage.xaml", UriKind.Relative));
+        }
+
         public void GoToCSVSettings_Click(object sender, EventArgs e)
         {
             fContainer.Navigate(new Uri("Pages/CSVSettingsPage.xaml", UriKind.Relative));
@@ -309,6 +307,10 @@ namespace WPFModernVerticalMenu
 
             fContainer.Navigate(new Uri("Pages/Extractor.xaml", UriKind.Relative));
 >>>>>>> Stashed changes
+        }
+        public void NavigateToCSVEditor()
+        {
+            fContainer.NavigationService.Navigate(new CSVEditorPage());
         }
         public void NavigateToCSVEditor()
         {

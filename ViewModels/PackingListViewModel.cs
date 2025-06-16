@@ -1,11 +1,4 @@
-<<<<<<< Updated upstream
-﻿using System.ComponentModel;
-using System.Windows;
-using System.Windows.Input;
-using Microsoft.Win32;
-using WPFModernVerticalMenu.Helpers;
-=======
-﻿using System;
+using System;
 using System.Windows;
 using System.ComponentModel;
 using System.Windows.Input;
@@ -17,7 +10,6 @@ using System.IO;
 using Newtonsoft.Json;
 using WPFModernVerticalMenu.Pages;
 using System.Collections.Generic;
->>>>>>> Stashed changes
 
 namespace WPFModernVerticalMenu.ViewModels
 {
@@ -50,7 +42,6 @@ namespace WPFModernVerticalMenu.ViewModels
                     AppState.Instance.SelectedArchive
                 );
             }, () => true);
->>>>>>> Stashed changes
         }
 
         public bool IsFileUploaded
@@ -113,10 +104,40 @@ namespace WPFModernVerticalMenu.ViewModels
             }
         }
 
-        private void GoToNextPage()
+        // ✅ Commandes pour les actions utilisateur
+        public ICommand SelectFileCommand { get; }
+        public ICommand RemoveFileCommand { get; }
+        public ICommand GoToNextPageCommand { get; }
+        public ICommand UploadFileCommand { get; }
+        public ICommand ExtractCommand { get; }
+
+
+        // ✅ Vérifie si un fichier est verrouillé
+        private bool IsFileLocked(string filePath)
         {
-            Application.Current.MainWindow.Content = new WPFModernVerticalMenu.Pages.SelectSupplier();
-=======
+            FileStream stream = null;
+            try
+            {
+                stream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.None);
+                return false;
+            }
+            catch (IOException)
+            {
+                return true;
+            }
+            finally
+            {
+                stream?.Dispose();
+            }
+        }
+
+        // ✅ Sélection d'un fichier via la boîte de dialogue
+        public void SelectFile()
+        {
+            OpenFileDialog dlg = new OpenFileDialog { Filter = "Excel Files (*.xls;*.xlsx)|*.xls;*.xlsx" };
+
+            if (dlg.ShowDialog() == true)
+            {
                 if (IsFileLocked(dlg.FileName))
                 {
                     UpdateStatus("❌ Le fichier est en cours d'utilisation par un autre programme.", "Red");

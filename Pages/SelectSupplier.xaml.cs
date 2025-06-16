@@ -16,7 +16,6 @@ using System.Windows.Shapes;
 =======
 using System;
 using WPFModernVerticalMenu.Services;
->>>>>>> Stashed changes
 
 namespace WPFModernVerticalMenu.Pages
 {
@@ -123,6 +122,5 @@ namespace WPFModernVerticalMenu.Pages
 
 
 
->>>>>>> Stashed changes
     }
 }

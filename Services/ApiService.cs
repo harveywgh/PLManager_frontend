@@ -9,8 +9,6 @@ namespace WPFModernVerticalMenu.Services
     public class ApiService
     {
         private readonly HttpClient _httpClient;
-<<<<<<< Updated upstream
-=======
         private readonly string _apiUrl = "http://192.168.1.2:8890/api/health-check"; 
         private readonly DispatcherTimer _timer;
 
@@ -71,7 +69,6 @@ namespace WPFModernVerticalMenu.Services
             catch (Exception ex)
             {
                 ApiStatusChanged?.Invoke($"❌ Erreur API: {ex.Message}", new SolidColorBrush(Colors.Red));
->>>>>>> Stashed changes
             }
         }
 
