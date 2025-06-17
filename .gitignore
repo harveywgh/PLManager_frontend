@@ -8,3 +8,4 @@ packages/
 *.db
 *.vsidx
 *.cache
+.vs/ 
