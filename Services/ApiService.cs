@@ -3,39 +3,44 @@ using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace WPFModernVerticalMenu.Services
 {
     public class ApiService
     {
         private readonly HttpClient _httpClient;
-        private readonly string _apiUrl = "http://192.168.1.2:8890/api/health-check"; 
+        private readonly string _apiUrl = "http://192.168.1.2:8890/api/health-check";
         private readonly DispatcherTimer _timer;
 
         public event Action<string, SolidColorBrush> ApiStatusChanged;
->>>>>>> Stashed changes
 
         public ApiService()
         {
             _httpClient = new HttpClient();
+
+            // Exemple d’utilisation de DispatcherTimer (commenté si non nécessaire)
+            // _timer = new DispatcherTimer
+            // {
+            //     Interval = TimeSpan.FromSeconds(10)
+            // };
+            // _timer.Tick += async (s, e) => await CheckApiStatusAsync();
+            // _timer.Start();
         }
 
         public async Task<string> UploadFileAsync(string filePath, string supplierCode)
         {
             if (string.IsNullOrEmpty(filePath) || string.IsNullOrEmpty(supplierCode))
-            {
                 throw new ArgumentException("Le chemin du fichier et le fournisseur sont requis.");
-            }
 
-            using (var client = new HttpClient()) { }
             var formData = new MultipartFormDataContent();
             formData.Add(new StreamContent(File.OpenRead(filePath)), "file", Path.GetFileName(filePath));
 
-            var apiUrl = $"http://127.0.0.1:8000/api/archives-file/{supplierCode}/";
+            string apiUrl = $"http://127.0.0.1:8000/api/archives-file/{supplierCode}/";
 
             try
             {
-<<<<<<< Updated upstream
                 HttpResponseMessage response = await _httpClient.PostAsync(apiUrl, formData);
                 response.EnsureSuccessStatusCode();
 
@@ -45,13 +50,22 @@ namespace WPFModernVerticalMenu.Services
             catch (HttpRequestException ex)
             {
                 MessageBox.Show($"Erreur réseau : {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                ApiStatusChanged?.Invoke("❌ Connexion perdue avec l'API.", new SolidColorBrush(Colors.Red));
                 return null;
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Erreur : {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                ApiStatusChanged?.Invoke($"❌ Erreur API: {ex.Message}", new SolidColorBrush(Colors.Red));
                 return null;
-=======
+            }
+        }
+
+        // Optionnel : Méthode pour pinger l’API régulièrement (à appeler dans le timer)
+        private async Task CheckApiStatusAsync()
+        {
+            try
+            {
                 HttpResponseMessage response = await _httpClient.GetAsync(_apiUrl);
                 if (response.IsSuccessStatusCode)
                 {
@@ -62,15 +76,10 @@ namespace WPFModernVerticalMenu.Services
                     ApiStatusChanged?.Invoke($"❌ API Erreur ({response.StatusCode})", new SolidColorBrush(Colors.Red));
                 }
             }
-            catch (HttpRequestException)
+            catch
             {
                 ApiStatusChanged?.Invoke("❌ Connexion perdue avec l'API.", new SolidColorBrush(Colors.Red));
             }
-            catch (Exception ex)
-            {
-                ApiStatusChanged?.Invoke($"❌ Erreur API: {ex.Message}", new SolidColorBrush(Colors.Red));
-            }
         }
-
     }
 }

@@ -80,16 +80,11 @@
                         </Button>
                     </StackPanel>
                     <!-- End: MenuItem -->
-<<<<<<< Updated upstream
-                    
-=======
 
                     <!-- ✅ Indicateur de statut API -->
                     <StackPanel Grid.Row="2" VerticalAlignment="Bottom" Margin="0 0 0 10" HorizontalAlignment="Center">
                         <Button x:Name="btnApiStatus"
                             Style="{DynamicResource PopupButtonStyle}"
-                            MouseEnter="btnApiStatus_MouseEnter"
-                            MouseLeave="btnApiStatus_MouseLeave"
                             IsHitTestVisible="False"
                             Focusable="False">
                             <Grid>
@@ -104,9 +99,6 @@
 
 
 
-
-
->>>>>>> Stashed changes
                     <!-- Start: Popup User Control -->
                     <Popup x:Name="Popup"  AllowsTransparency="True"  HorizontalOffset="0" VerticalOffset="10">
                         <ctls:UserPopup x:Name="Header" Foreground="{DynamicResource PrimaryTextColor}"/>

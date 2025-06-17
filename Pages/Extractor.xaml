@@ -25,81 +25,84 @@
         <Border CornerRadius="10" Background="{DynamicResource FourthBackgroundColor}" Margin="30,0,30,30">
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                 <TextBlock Text="Importer une Packing List" FontSize="20" Foreground="{DynamicResource TextFifthColor}" 
-                           FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+                           FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,40"/>
 
                 <!-- Zone de glisser-déposer cliquable -->
                 <Button Style="{StaticResource PopupButtonStyle}" 
-                    Command="{Binding SelectFileCommand}"
-                    Width="600" Height="350" Background="Gainsboro" BorderThickness="0">
-                    <Grid Width="600" Height="350" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <!-- Contour en pointillés -->
-                        <Border BorderBrush="Gray" BorderThickness="1.5" CornerRadius="5"
-                            Background="#fbfbff">
-                            <Border.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="BorderBrush">
-                                        <Setter.Value>
-                                            <VisualBrush TileMode="Tile" Viewport="0,0,10,5" ViewportUnits="Absolute">
-                                                <VisualBrush.Visual>
-                                                    <Rectangle Width="6" Height="1" Fill="Gray"/>
-                                                </VisualBrush.Visual>
-                                            </VisualBrush>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </Border.Resources>
-                        </Border>
+                Command="{Binding SelectFileCommand}"
+                Width="527" Height="300"  Background="Transparent" BorderThickness="0">
+                    <Border BorderBrush="Gray" BorderThickness="2" CornerRadius="100"
+                    Background="#fbfbff"
+                    Width="600" Height="350" HorizontalAlignment="Center"
+                    VerticalAlignment="Center" AllowDrop="True"
+                    Drop="Border_Drop" DragEnter="Border_DragEnter" DragLeave="Border_DragLeave">
+                        <!-- Utilisation d'une Grid pour éviter l'erreur de multiple Child -->
+                        <Grid>
+                            <Rectangle Width="527" Height="300" 
+                       Stroke="Gray" 
+                       StrokeThickness="1.5"
+                       RadiusX="10" RadiusY="10"
+                       StrokeDashArray="4 4"/>
 
-                        <!-- Contenu de la zone de glisser-déposer -->
-                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <Path Data="{DynamicResource clouduploadIcon}" 
-                              Width="57" 
-                              Height="44" 
-                              Fill="{DynamicResource PrimaryBlueColor}" 
-                              Stretch="Fill"
-                              Margin="0,0,0,0"/>
-                            <StackPanel HorizontalAlignment="Center">
-                                <TextBlock FontSize="16" FontWeight="SemiBold" TextAlignment="Center">
-                    <LineBreak/>
-                    <Run Text="Déposer la Packing List ou " Foreground="{DynamicResource TextFifthColor}"/>
-                    <Run Text="parcourir" 
-                         Foreground="{DynamicResource PrimaryBlueColor}" 
-                         TextDecorations="Underline"/>
-                                </TextBlock>
-                                <TextBlock Foreground="Gray" FontSize="13" TextAlignment="Center">
-                    Formats supportés : XLS, XLSX
-                                </TextBlock>
+                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Path Data="{DynamicResource clouduploadIcon}" 
+                      Width="57" 
+                      Height="44" 
+                      Fill="{DynamicResource PrimaryBlueColor}" 
+                      Stretch="Fill"
+                      Margin="0,0,0,0"/>
+                                <StackPanel HorizontalAlignment="Center">
+                                    <TextBlock FontSize="16" FontWeight="SemiBold" TextAlignment="Center">
+                        <LineBreak/>
+                        <Run Text="Déposer la Packing List ou " Foreground="{DynamicResource TextFifthColor}"/>
+                        <Run Text="parcourir" 
+                             Foreground="{DynamicResource PrimaryBlueColor}" 
+                             TextDecorations="Underline"/>
+                                    </TextBlock>
+                                    <TextBlock Foreground="Gray" FontSize="13" TextAlignment="Center">
+                        Formats supportés : XLS, XLSX
+                                    </TextBlock>
+                                </StackPanel>
                             </StackPanel>
-                        </StackPanel>
-                    </Grid>
+                        </Grid>
+                    </Border>
                 </Button>
 
-                <!-- Message de succès après import -->
-                <Border Visibility="{Binding IsFileUploaded, Converter={StaticResource BoolToVisibilityConverter}}">
-                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <Path Data="{DynamicResource checkIcon}" 
-                          Width="57" 
-                          Height="44" 
-                          Fill="Green" 
-                          Stretch="Fill"/>
-                            <TextBlock Text="Packing List importée avec succès!" 
-                               Foreground="Green"
-                               FontSize="16" 
-                               HorizontalAlignment="Center"/>
-                    </StackPanel>
-                    <Border.Triggers>
-                        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.5"/>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                    </Border.Triggers>
-                </Border>
+
+                <!-- ✅ Conteneur avec bordure -->
+                <Grid Margin="0, 5, 0, 0">
+                    <Border BorderBrush="{DynamicResource PrimaryIconColor}" BorderThickness="0" CornerRadius="5" Padding="4">
+                        <Grid Margin="0, 0, 0, 0" Visibility="{Binding IsFileSelected, Converter={StaticResource BoolToVisibilityConverter}}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <!-- Icône à gauche -->
+                                <ColumnDefinition Width="*"/>
+                                <!-- Nom du fichier au centre (occupe tout l'espace dispo) -->
+                                <ColumnDefinition Width="Auto"/>
+                                <!-- Bouton supprimer à droite -->
+                            </Grid.ColumnDefinitions>
+
+                            <!-- ✅ Icône du fichier (À gauche) -->
+                            <Viewbox Width="20" Height="20" VerticalAlignment="Center" Grid.Column="0">
+                                <Path Data="{StaticResource fileIcon}" Fill="{DynamicResource TextFourthColor}"/>
+                            </Viewbox>
+
+                            <!-- ✅ Nom du fichier (Au centre) -->
+                            <TextBlock Text="{Binding FileName}" FontSize="15" Foreground="{DynamicResource TextFourthColor}" FontWeight="DemiBold" 
+                                VerticalAlignment="Center" Margin="10,0,10,0" Grid.Column="1"/>
+
+                            <!-- ✅ Bouton pour supprimer le fichier (À droite) avec effet Hover -->
+                            <Button Style="{StaticResource RemoveButtonStyle}"
+                            Width="30" Height="30"
+                            Command="{Binding RemoveFileCommand}"
+                            Grid.Column="2"/>
+                        </Grid>
+                    </Border>
+                </Grid>
 
 
-                <!-- Bouton stylisé -->
+
+    <!-- Bouton stylisé -->
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -117,16 +120,17 @@
 
                     <!-- Bouton Suivant en bas à droite -->
                     <Button Content="Suivant"
-            Style="{StaticResource SquareButtonStyle}"
-            Width="200" Height="40"
-            FontSize="14"
-            FontWeight="SemiBold"
-            Margin="0, 25, 0, 0"
-            Grid.Row="1" 
-            Grid.Column="1"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Bottom"
-            Command="{Binding GoToNextPageCommand}"/>
+                        Style="{StaticResource SquareButtonStyle}"
+                        Width="200" Height="40"
+                        FontSize="14"
+                        FontWeight="SemiBold"
+                        Margin="0, 25, 0, 0"
+                        Grid.Row="1" 
+                        Grid.Column="1"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom"
+                        Command="{Binding GoToNextPageCommand}"
+                        IsEnabled="{Binding IsFileUploaded}"/>
                 </Grid>
 
             </StackPanel>

@@ -10,24 +10,24 @@ using System.IO;
 using Newtonsoft.Json;
 using WPFModernVerticalMenu.Pages;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace WPFModernVerticalMenu.ViewModels
 {
     public class PackingListViewModel : INotifyPropertyChanged
     {
-        private string _selectedFile;
         private bool _isFileUploaded;
+        private string _statusMessage;
+        private string _statusColor = "Black";
+        private string _fileName;
+        private readonly ApiClientService _apiClientService;
 
-        public string SelectedFile
+        public event EventHandler NavigateToSelectSupplier;
+        public event EventHandler NavigateToLoadingPage;
+        public event EventHandler CloseLoadingPage;
+
+        public PackingListViewModel()
         {
-<<<<<<< Updated upstream
-            get => _selectedFile;
-            set
-            {
-                _selectedFile = value;
-                OnPropertyChanged(nameof(SelectedFile));
-            }
-=======
             _apiClientService = new ApiClientService();
             SelectFileCommand = new RelayCommand(SelectFile);
             RemoveFileCommand = new RelayCommand(RemoveFile, () => IsFileUploaded);
@@ -44,6 +44,7 @@ namespace WPFModernVerticalMenu.ViewModels
             }, () => true);
         }
 
+        // ✅ Vérifie si un fichier est importé
         public bool IsFileUploaded
         {
             get => _isFileUploaded;
@@ -51,56 +52,38 @@ namespace WPFModernVerticalMenu.ViewModels
             {
                 _isFileUploaded = value;
                 OnPropertyChanged(nameof(IsFileUploaded));
+                OnPropertyChanged(nameof(IsFileSelected)); // Active/désactive le bouton de suppression
             }
         }
 
-        public ICommand SelectFileCommand { get; }
-        public ICommand GoToNextPageCommand { get; }
-<<<<<<< Updated upstream
-=======
-        public ICommand UploadFileCommand { get; }
-        public ICommand ExtractCommand { get; }
+        public bool IsFileSelected => !string.IsNullOrEmpty(FileName);
 
-
-        // ✅ Vérifie si un fichier est verrouillé
-        private bool IsFileLocked(string filePath)
+        // ✅ Nom du fichier importé
+        public string FileName
         {
-            FileStream stream = null;
-            try
+            get => _fileName;
+            set
             {
-                stream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.None);
-                return false;
-            }
-            catch (IOException)
-            {
-                return true;
-            }
-            finally
-            {
-                stream?.Dispose();
+                _fileName = value;
+                OnPropertyChanged(nameof(FileName));
+                OnPropertyChanged(nameof(IsFileSelected));
             }
         }
->>>>>>> Stashed changes
 
-        public PackingListViewModel()
+        // ✅ Statut du processus (Importation / Erreur / Envoi)
+        public string StatusMessage
         {
-            SelectFileCommand = new RelayCommand<object>(param => SelectFile());
-            GoToNextPageCommand = new RelayCommand<object>(param => GoToNextPage());
+            get => _statusMessage;
+            set { _statusMessage = value; OnPropertyChanged(nameof(StatusMessage)); }
         }
 
-        private void SelectFile()
+        public string StatusColor
         {
-            OpenFileDialog dlg = new OpenFileDialog
+            get => _statusColor;
+            set
             {
-                Filter = "Excel Files (*.xls;*.xlsx)|*.xls;*.xlsx"
-            };
-
-            if (dlg.ShowDialog() == true)
-            {
-<<<<<<< Updated upstream
-                SelectedFile = dlg.FileName;
-                IsFileUploaded = true;
-                MessageBox.Show("Fichier importé avec succès!", "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
+                _statusColor = string.IsNullOrEmpty(value) ? "Black" : value;
+                OnPropertyChanged(nameof(StatusColor));
             }
         }
 
@@ -223,20 +206,16 @@ namespace WPFModernVerticalMenu.ViewModels
                     // ✅ Extraction réussie — on essaye de parser et sauvegarder le chemin CSV
                     try
                     {
-                        var parsed = JsonConvert.DeserializeObject<Dictionary<string, object>>(response);
+                        // Ne pas parser ici : on les récupère proprement avec GetExtractionFilesAsync
+                        string extractionId = response;
+                        AppState.Instance.SetExtractionId(extractionId);
 
-                        if (parsed.ContainsKey("generated_files") && parsed["generated_files"] is Newtonsoft.Json.Linq.JArray filesArray)
+                        // Téléchargement des fichiers associés
+                        var fileList = await _apiClientService.GetExtractionFilesAsync(extractionId);
+                        if (fileList != null && fileList.Count > 0)
                         {
-                            var fileList = filesArray.ToObject<List<string>>();
-                            if (fileList?.Count > 0)
-                            {
-                                AppState.Instance.SetExtractedFiles(fileList);
-
-                                string relativePath = fileList[0].Replace("/", "\\");
-                                string absolutePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath);
-                                AppState.Instance.SetExtractedCsvPath(absolutePath);
-                                Console.WriteLine($"✅ Chemin CSV enregistré dans AppState : {absolutePath}");
-                            }
+                            AppState.Instance.SetExtractedFiles(fileList);
+                            Console.WriteLine($"✅ Fichiers associés : {string.Join(", ", fileList)}");
                         }
                     }
                     catch (Exception ex)
@@ -311,7 +290,6 @@ namespace WPFModernVerticalMenu.ViewModels
         {
             StatusMessage = message;
             StatusColor = color;
->>>>>>> Stashed changes
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -1,11 +1,11 @@
 ﻿using PLManager.Windows;
-using System;
-using System.IO;
 using System.ComponentModel;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media.Animation;
+using System.Windows;
+using System;
+using System.Windows.Controls;
+using System.IO;
 using WPFModernVerticalMenu.Services;
 
 namespace WPFModernVerticalMenu.Pages
@@ -107,20 +107,29 @@ namespace WPFModernVerticalMenu.Pages
 
             try
             {
-                // ✅ Utilise le chemin distant tel qu'il est dans outputs/
-                string remoteApiPath = extractedFiles[0];
+                string remotePath = extractedFiles[0];
 
-                Console.WriteLine($"📁 Chemin du fichier à éditer (distant) : {remoteApiPath}");
+                if (string.IsNullOrWhiteSpace(remotePath) || remotePath.Contains(":\\"))
+                {
+                    MessageBox.Show("❌ Chemin API invalide : chemin local détecté au lieu d’un chemin distant (outputs/...).", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
 
-                // ✅ Ouvre l’éditeur avec ce chemin — ce sera lui qui fera l’appel API et chargera le contenu
-                var editorWindow = new CSVEditorWindow(); 
-                await editorWindow.LoadCsvFiles(AppState.Instance.ExtractedFiles);
+                string tempCsvPath = await new ApiClientService().DownloadFileToTempAsync(remotePath);
+
+                if (!File.Exists(tempCsvPath))
+                {
+                    MessageBox.Show("Le fichier CSV n'a pas pu être téléchargé.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
+                // ✅ Ouvre l’éditeur en mode API avec le chemin original
+                var editorWindow = new CSVEditorWindow(remotePath);
                 editorWindow.Show();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"❌ Erreur lors de l'ouverture de l'éditeur : {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
-                Console.WriteLine("❌ Exception dans btnVisualiser_Click : " + ex);
+                MessageBox.Show($"Erreur lors du chargement du fichier : {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

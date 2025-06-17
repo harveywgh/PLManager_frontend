@@ -1,17 +1,27 @@
 ﻿using System.Windows;
+using System.IO;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using WPFModernVerticalMenu.Services;
 using WPFModernVerticalMenu.ViewModels;
 
 namespace WPFModernVerticalMenu.Pages
 {
     public partial class Extractor : Page
     {
+        private PackingListViewModel _viewModel;
+
         public Extractor()
         {
             InitializeComponent();
-            DataContext = new PackingListViewModel();
+            _viewModel = new PackingListViewModel();
+            DataContext = _viewModel;
+
+            if (Application.Current.MainWindow is MainWindow mainWindow)
+            {
+                _viewModel.NavigateToSelectSupplier += mainWindow.NavigateToSelectSupplier;
+            }
         }
 
         private void Border_DragEnter(object sender, DragEventArgs e)
@@ -34,13 +44,10 @@ namespace WPFModernVerticalMenu.Pages
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
                 if (files.Length > 0)
                 {
-                    if (DataContext is PackingListViewModel viewModel)
-                    {
-                        viewModel.SelectedFile = files[0];
-                        viewModel.IsFileUploaded = true;
-                    }
-
-                    MessageBox.Show($"Fichier glissé : {files[0]}", "Fichier Importé", MessageBoxButton.OK, MessageBoxImage.Information);
+                    AppState.Instance.SetSelectedFile(files[0]);
+                    _viewModel.FileName = Path.GetFileName(files[0]);
+                    _viewModel.IsFileUploaded = true;
+                    _viewModel.UpdateStatus("Fichier importé avec succès!", "Green");
                 }
             }
             ((Border)sender).BorderBrush = new SolidColorBrush(Colors.Gray);

@@ -79,7 +79,7 @@ public class ApiClientService
                         if (!response.IsSuccessStatusCode)
                         {
                             Console.WriteLine("❌ Erreur API : " + result);
-                            return $"Erreur : {result}"; 
+                            return $"Erreur : {result}";
                         }
 
                         // ✅ Réponse OK - on continue
@@ -122,7 +122,7 @@ public class ApiClientService
     }
 
 
-    public async Task<string> GetExtractionFilesAsync(string extractionId)
+    public async Task<List<string>> GetExtractionFilesAsync(string extractionId)
     {
         try
         {
@@ -147,34 +147,39 @@ public class ApiClientService
                 return null;
             }
 
-            List<string> fileList = filesArray.ToObject<List<string>>();
-            if (fileList.Count == 0)
+            List<string> remoteFileList = filesArray.ToObject<List<string>>();
+
+            if (remoteFileList.Count == 0)
             {
                 Console.WriteLine("❌ Aucun fichier disponible.");
                 return null;
             }
 
-            // 🔹 2. Télécharger le premier fichier via l'API
-            string remoteFilePath = fileList[0];
-            string downloadUrl = $"{_baseUrl}download-csv/?file_path={Uri.EscapeDataString(remoteFilePath)}";
+            // ✅ Sauvegarder les chemins distants côté API (ex: outputs/ZestFruit/...)
+            AppState.Instance.SetExtractedFiles(remoteFileList);
 
-            HttpResponseMessage fileResponse = await _httpClient.GetAsync(downloadUrl);
-
-            if (!fileResponse.IsSuccessStatusCode)
+            // Optionnel : Télécharger les fichiers en local si tu veux les visualiser maintenant
+            foreach (string remoteFilePath in remoteFileList)
             {
-                Console.WriteLine($"❌ Erreur lors du téléchargement du fichier CSV : {fileResponse.StatusCode}");
-                return null;
+                string downloadUrl = $"{_baseUrl}download-csv/?file_path={Uri.EscapeDataString(remoteFilePath)}";
+                HttpResponseMessage fileResponse = await _httpClient.GetAsync(downloadUrl);
+
+                if (!fileResponse.IsSuccessStatusCode)
+                {
+                    Console.WriteLine($"❌ Erreur lors du téléchargement : {remoteFilePath} -> {fileResponse.StatusCode}");
+                    continue;
+                }
+
+                string localPath = Path.Combine(Path.GetTempPath(), Path.GetFileName(remoteFilePath));
+                using (var fs = new FileStream(localPath, FileMode.Create, FileAccess.Write))
+                {
+                    await fileResponse.Content.CopyToAsync(fs);
+                }
+
+                Console.WriteLine($"✅ Fichier CSV téléchargé localement : {localPath}");
             }
 
-            // 🔹 3. Sauvegarde temporaire en local
-            string localCsvPath = Path.Combine(Path.GetTempPath(), Path.GetFileName(remoteFilePath));
-            using (var fileStream = new FileStream(localCsvPath, FileMode.Create, FileAccess.Write, FileShare.None))
-            {
-                await fileResponse.Content.CopyToAsync(fileStream);
-            }
-
-            Console.WriteLine($"✅ Fichier CSV téléchargé en local : {localCsvPath}");
-            return localCsvPath;
+            return remoteFileList; // Ce qu'on retourne à l'appelant
         }
         catch (Exception ex)
         {
@@ -183,8 +188,12 @@ public class ApiClientService
         }
     }
 
+
     public async Task<string> DownloadFileToTempAsync(string remoteFilePath)
     {
+        if (string.IsNullOrWhiteSpace(remoteFilePath) || remoteFilePath.Contains(":\\"))
+            throw new Exception("❌ Chemin API invalide : chemin local détecté au lieu d’un chemin distant (outputs/...)");
+
         string downloadUrl = $"{_baseUrl}download-csv/?file_path={Uri.EscapeDataString(remoteFilePath)}";
 
         HttpResponseMessage response = await _httpClient.GetAsync(downloadUrl);

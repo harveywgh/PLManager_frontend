@@ -17,6 +17,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Windows.Media;
 using System.Windows.Forms.VisualStyles;
+using WPFModernVerticalMenu.Services;
 
 namespace PLManager.Windows
 {
@@ -428,9 +429,21 @@ namespace PLManager.Windows
                 }
 
                 string remotePath = OriginalApiPath.Replace("\\", "/");
+
+                // ✅ Si le chemin commence déjà par "outputs/", on garde tel quel
                 if (!remotePath.StartsWith("outputs/"))
                 {
-                    remotePath = "outputs/" + Path.GetFileName(OriginalApiPath);
+                    // ✅ Sinon, on ajoute outputs/ + nom du fournisseur si possible
+                    string supplier = AppState.Instance.SelectedSupplier?.Code;
+
+                    if (!string.IsNullOrEmpty(supplier) && !remotePath.StartsWith(supplier + "/"))
+                    {
+                        remotePath = $"outputs/{supplier}/{Path.GetFileName(remotePath)}";
+                    }
+                    else
+                    {
+                        remotePath = $"outputs/{remotePath}";
+                    }
                 }
 
                 Console.WriteLine($"📤 [WPF] Chemin API cible = {remotePath}");
