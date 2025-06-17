@@ -12,13 +12,15 @@ public class ApiClientService
 {
     private readonly HttpClient _httpClient;
     public HttpClient HttpClient => _httpClient;
-    public readonly string _baseUrl = "http://192.168.1.2:8890/api/";
+    private readonly string _baseUrl;
     public string BaseUrl => _baseUrl;
 
 
     public ApiClientService()
     {
         _httpClient = new HttpClient();
+        var apiService = new ApiService();
+        _baseUrl = apiService.BaseApiUrl;
     }
 
     public async Task<bool> SendCSVSettingsAsync(string country, string forwarder, string importer, string archive)

@@ -84,15 +84,16 @@
                     <!-- ✅ Indicateur de statut API -->
                     <StackPanel Grid.Row="2" VerticalAlignment="Bottom" Margin="0 0 0 10" HorizontalAlignment="Center">
                         <Button x:Name="btnApiStatus"
-                            Style="{DynamicResource PopupButtonStyle}"
-                            IsHitTestVisible="False"
-                            Focusable="False">
+                                Style="{DynamicResource PopupButtonStyle}"
+                                MouseEnter="btnApiStatus_MouseEnter"
+                                MouseLeave="btnApiStatus_MouseLeave"
+                                IsHitTestVisible="False"
+                                Focusable="False">
                             <Grid>
-                                <!-- ✅ Icône API qui change de couleur dynamiquement -->
                                 <Path Data="{StaticResource apiIcon}"
-                                  Fill="{Binding ApiStatusColor}" 
-                                  Width="24" Height="24"
-                                  VerticalAlignment="Center"/>
+                                      Fill="{Binding ApiStatusColor}" 
+                                      Width="24" Height="24"
+                                      VerticalAlignment="Center"/>
                             </Grid>
                         </Button>
                     </StackPanel>

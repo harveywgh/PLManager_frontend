@@ -16,7 +16,7 @@ using WPFModernVerticalMenu.ViewModels;
 
 namespace WPFModernVerticalMenu
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
         private readonly ApiService _apiService;
         private string _apiStatusText = "API NOT OK";
@@ -78,8 +78,8 @@ namespace WPFModernVerticalMenu
             {
                 ApiStatusText = statusText;
                 ApiStatusColor = statusColor;
-                OnPropertyChanged(nameof(ApiStatusText));
-                OnPropertyChanged(nameof(ApiStatusColor));
+                OnPropertyChanged(nameof(ApiStatusText));  
+                OnPropertyChanged(nameof(ApiStatusColor)); 
             });
         }
 
@@ -122,7 +122,16 @@ namespace WPFModernVerticalMenu
         private void btnLocalEditor_MouseEnter(object sender, MouseEventArgs e) => ShowPopup(btnLocalEditor, "Éditeur Local");
         private void btnProductStock_MouseEnter(object sender, MouseEventArgs e) => ShowPopup(btnProductStock, "Réglages");
         private void btnOrderList_MouseEnter(object sender, MouseEventArgs e) => ShowPopup(btnOrderList, "Aide");
-        private void btnApiStatus_MouseEnter(object sender, MouseEventArgs e) => ShowPopup(btnApiStatus, ApiStatusText);
+        private void btnApiStatus_MouseEnter(object sender, MouseEventArgs e)
+        {
+            if (Tg_Btn.IsChecked == false)
+            {
+                Popup.PlacementTarget = btnApiStatus;
+                Popup.Placement = PlacementMode.Right;
+                Popup.IsOpen = true;
+                Header.PopupText.Text = ApiStatusText; 
+            }
+        }
 
 
         // MouseLeave Events
@@ -133,6 +142,11 @@ namespace WPFModernVerticalMenu
         private void btnProductStock_MouseLeave(object sender, MouseEventArgs e) => HidePopup(sender, e);
         private void btnOrderList_MouseLeave(object sender, MouseEventArgs e) => HidePopup(sender, e);
         private void btnSetting_MouseLeave(object sender, MouseEventArgs e) => HidePopup(sender, e);
+        private void btnApiStatus_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Popup.Visibility = Visibility.Collapsed;
+            Popup.IsOpen = false;
+        }
 
         // Button Click Events
         private void btnClose_Click(object sender, RoutedEventArgs e) => Close();
