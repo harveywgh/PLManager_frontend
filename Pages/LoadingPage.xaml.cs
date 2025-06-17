@@ -115,15 +115,7 @@ namespace WPFModernVerticalMenu.Pages
                     return;
                 }
 
-                string tempCsvPath = await new ApiClientService().DownloadFileToTempAsync(remotePath);
-
-                if (!File.Exists(tempCsvPath))
-                {
-                    MessageBox.Show("Le fichier CSV n'a pas pu être téléchargé.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    return;
-                }
-
-                // ✅ Ouvre l’éditeur en mode API avec le chemin original
+                // ✅ Ouvre directement l’éditeur, qui télécharge et gère le stream
                 var editorWindow = new CSVEditorWindow(remotePath);
                 editorWindow.Show();
             }
@@ -132,8 +124,6 @@ namespace WPFModernVerticalMenu.Pages
                 MessageBox.Show($"Erreur lors du chargement du fichier : {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
-
 
         // ✅ Retourner au tableau de bord
         private void btnDashboard_Click(object sender, RoutedEventArgs e)

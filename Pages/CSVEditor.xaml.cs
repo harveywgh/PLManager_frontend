@@ -169,13 +169,12 @@ namespace PL_Manager.Pages
             {
                 if (index < 0 || index >= allExtractedFiles.Count) return;
 
-                // ✅ Télécharger depuis le back
-                string tempPath = await _apiClientService.DownloadFileToTempAsync(allExtractedFiles[index]);
-
-                csvFilePath = tempPath;
+                string remotePath = allExtractedFiles[index];
                 currentFileIndex = index;
 
-                using (var reader = new StreamReader(csvFilePath))
+                // ✅ Télécharger directement le fichier sous forme de stream
+                using (Stream stream = await _apiClientService.DownloadFileAsStreamAsync(remotePath))
+                using (var reader = new StreamReader(stream))
                 using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture) { Delimiter = ";" }))
                 using (var dr = new CsvDataReader(csv))
                 {
@@ -187,6 +186,8 @@ namespace PL_Manager.Pages
                     column.ReadOnly = false;
 
                 CsvDataGrid.ItemsSource = csvDataTable.DefaultView;
+
+                // (Ré)abonner à l'événement de scroll si nécessaire
                 MainScrollViewer.ScrollChanged -= MainScrollViewer_ScrollChanged;
                 MainScrollViewer.ScrollChanged += MainScrollViewer_ScrollChanged;
             }

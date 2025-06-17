@@ -45,7 +45,11 @@ namespace PLManager.Windows
         public CSVEditorWindow(string csvPath) : this()
         {
             OriginalApiPath = csvPath;
-            _ = LoadRemoteCsvAsync(csvPath); 
+            _ = LoadRemoteCsvAsync(csvPath);
+            if (AppState.Instance.ExtractedFiles != null && AppState.Instance.ExtractedFiles.Count > 0)
+            {
+                _ = LoadCsvFiles(AppState.Instance.ExtractedFiles);
+            }
         }
 
         private void InitializeSourceGrid()
@@ -85,9 +89,10 @@ namespace PLManager.Windows
             }
         }
 
-        private void LoadCsvFile(string path)
+
+        private void LoadCsvFile(Stream stream)
         {
-            using (var reader = new StreamReader(path))
+            using (var reader = new StreamReader(stream))
             using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture) { Delimiter = ";" }))
             using (var dr = new CsvDataReader(csv))
             {
@@ -95,13 +100,12 @@ namespace PLManager.Windows
                 csvData.Load(dr);
 
                 foreach (DataColumn col in csvData.Columns)
-                {
                     col.ReadOnly = false;
-                }
             }
 
             DisplayDataInGrid();
         }
+
 
         public async Task LoadCsvFiles(List<string> extractedFiles)
         {
@@ -169,9 +173,11 @@ namespace PLManager.Windows
         {
             try
             {
-                string tempPath = await _apiClientService.DownloadFileToTempAsync(filePath);
-                OriginalApiPath = filePath;  
-                LoadCsvFile(tempPath);
+                using (Stream stream = await _apiClientService.DownloadFileAsStreamAsync(filePath))
+                {
+                    OriginalApiPath = filePath;
+                    LoadCsvFile(stream);
+                }
             }
             catch (Exception ex)
             {
@@ -479,17 +485,18 @@ namespace PLManager.Windows
             }
         }
 
-
         private async Task LoadRemoteCsvAsync(string csvPath)
         {
             try
             {
                 Console.WriteLine($"🌍 Requête pour téléchargement distant : {csvPath}");
-                string tempPath = await _apiClientService.DownloadFileToTempAsync(csvPath);
-                CurrentFilePath = tempPath;
-                LoadCsvFile(tempPath);
-                Title = $"Éditeur CSV - {System.IO.Path.GetFileName(csvPath)}";
-                Console.WriteLine($"✅ Fichier temporaire local pour édition : {tempPath}");
+
+                using (Stream stream = await _apiClientService.DownloadFileAsStreamAsync(csvPath))
+                {
+                    LoadCsvFile(stream);
+                    Title = $"Éditeur CSV - {System.IO.Path.GetFileName(csvPath)}";
+                    Console.WriteLine("✅ Fichier chargé depuis l'API sans fichier temporaire.");
+                }
             }
             catch (Exception ex)
             {

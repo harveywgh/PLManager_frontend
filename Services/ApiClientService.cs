@@ -181,7 +181,7 @@ public class ApiClientService
                 Console.WriteLine($"✅ Fichier CSV téléchargé localement : {localPath}");
             }
 
-            return remoteFileList; // Ce qu'on retourne à l'appelant
+            return remoteFileList;
         }
         catch (Exception ex)
         {
@@ -190,26 +190,18 @@ public class ApiClientService
         }
     }
 
-
-    public async Task<string> DownloadFileToTempAsync(string remoteFilePath)
+    public async Task<Stream> DownloadFileAsStreamAsync(string remoteFilePath)
     {
         if (string.IsNullOrWhiteSpace(remoteFilePath) || remoteFilePath.Contains(":\\"))
-            throw new Exception("❌ Chemin API invalide : chemin local détecté au lieu d’un chemin distant (outputs/...)");
+            throw new Exception("❌ Chemin API invalide : chemin local détecté.");
 
         string downloadUrl = $"{_baseUrl}download-csv/?file_path={Uri.EscapeDataString(remoteFilePath)}";
-
         HttpResponseMessage response = await _httpClient.GetAsync(downloadUrl);
+
         if (!response.IsSuccessStatusCode)
-            throw new Exception("Échec du téléchargement du fichier depuis l'API.");
+            throw new Exception("Échec du téléchargement depuis l'API.");
 
-        string localTempPath = Path.Combine(Path.GetTempPath(), Path.GetFileName(remoteFilePath));
-        using (var stream = new FileStream(localTempPath, FileMode.Create, FileAccess.Write))
-        {
-            await response.Content.CopyToAsync(stream);
-        }
-
-        return localTempPath;
+        return await response.Content.ReadAsStreamAsync(); 
     }
-
 
 }
