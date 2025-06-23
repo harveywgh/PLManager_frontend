@@ -127,10 +127,7 @@ namespace WPFModernVerticalMenu.ViewModels
                     return;
                 }
 
-                Console.WriteLine($"📂 Enregistrement du fichier sélectionné : {dlg.FileName}");
-
-                AppState.Instance.SetSelectedFile(dlg.FileName);  // 🔥 Assure-toi que c'est bien sauvegardé
-                Console.WriteLine($"✅ DEBUG: Fichier enregistré dans AppState: {AppState.Instance.SelectedFile}");
+                AppState.Instance.SetSelectedFile(dlg.FileName);
                 FileName = Path.GetFileName(dlg.FileName);
                 IsFileUploaded = true;
                 UpdateStatus("✅ Fichier importé avec succès!", "Green");
@@ -257,8 +254,8 @@ namespace WPFModernVerticalMenu.ViewModels
                     if (string.IsNullOrEmpty(response) || response.StartsWith("Erreur") || response.Contains("500"))
                     {
                         // ❌ Erreur détectée dans la réponse
-                        UpdateStatus("❌ L'extraction a échoué.", "Red");
-                        loadingPage.ShowErrorMessage($"❌ L'extraction a échoué : {response}");
+                        UpdateStatus("L'extraction a échoué.", "Red");
+                        loadingPage.ShowErrorMessage($"L'extraction a échoué : {response}");
                     }
                     else
                     {
@@ -270,12 +267,12 @@ namespace WPFModernVerticalMenu.ViewModels
             }
             catch (Exception ex)
             {
-                UpdateStatus($"❌ Erreur lors de l'envoi : {ex.Message}", "Red");
+                UpdateStatus($"Erreur lors de l'envoi : {ex.Message}", "Red");
 
                 if (Application.Current.MainWindow is MainWindow mainWindow &&
                     mainWindow.fContainer.Content is LoadingPage loadingPage)
                 {
-                    loadingPage.ShowErrorMessage("❌ Erreur inattendue : " + ex.Message);
+                    loadingPage.ShowErrorMessage("Erreur inattendue : " + ex.Message);
                 }
             }
             finally

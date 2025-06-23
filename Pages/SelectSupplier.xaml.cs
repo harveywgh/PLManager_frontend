@@ -79,11 +79,7 @@ namespace WPFModernVerticalMenu.Pages
             {
                 if (viewModel.SelectedSupplier != null)
                 {
-                    Console.WriteLine($"📦 Fournisseur sélectionné via clic : {viewModel.SelectedSupplier.Name}");
                     AppState.Instance.SetSelectedSupplier(viewModel.SelectedSupplier);
-
-                    // Vérification après enregistrement
-                    Console.WriteLine($"✅ DEBUG: Fournisseur après sélection dans AppState: {AppState.Instance.SelectedSupplier?.Name ?? "NULL"}");
                 }
             }
         }

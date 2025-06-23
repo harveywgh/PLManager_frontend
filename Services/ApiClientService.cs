@@ -35,14 +35,10 @@ public class ApiClientService
                 archive = archive
             };
 
-            Console.WriteLine($"📌 DEBUG JSON : {JsonConvert.SerializeObject(settings)}");
-
             string json = JsonConvert.SerializeObject(settings);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
             HttpResponseMessage response = await _httpClient.PostAsync($"{_baseUrl}csv-settings", content);
-
-            Console.WriteLine($"📌 DEBUG REPONSE API : {response.StatusCode}");
             return response.IsSuccessStatusCode;
         }
         catch (Exception ex)
@@ -56,12 +52,10 @@ public class ApiClientService
     {
         if (string.IsNullOrEmpty(filePath) || string.IsNullOrEmpty(supplierName))
         {
-            Console.WriteLine("❌ Erreur: Le fichier et le fournisseur sont requis.");
             throw new ArgumentException("Le fichier et le fournisseur sont requis.");
         }
 
         string apiUrl = $"{_baseUrl}archives-file/{supplierName}/";
-        Console.WriteLine($"📡 Envoi du fichier {filePath} vers {apiUrl}");
 
         try
         {
@@ -75,16 +69,27 @@ public class ApiClientService
                     using (HttpResponseMessage response = await _httpClient.PostAsync(apiUrl, formData))
                     {
                         string result = await response.Content.ReadAsStringAsync();
-                        Console.WriteLine($"📤 Réponse reçue du serveur : {response.StatusCode}");
 
                         // ✅ Cas d'erreur explicite
                         if (!response.IsSuccessStatusCode)
                         {
-                            Console.WriteLine("❌ Erreur API : " + result);
-                            return $"Erreur : {result}";
+                            string apiError = await response.Content.ReadAsStringAsync();
+                            string errorMessage = "Erreur inconnue.";
+
+                            try
+                            {
+                                var errorObj = Newtonsoft.Json.Linq.JObject.Parse(apiError);
+                                errorMessage = errorObj["detail"]?.ToString() ?? apiError;
+                            }
+                            catch
+                            {
+                                errorMessage = apiError;
+                            }
+
+                            Console.WriteLine("❌ Erreur API : " + errorMessage);
+                            throw new Exception(errorMessage); 
                         }
 
-                        // ✅ Réponse OK - on continue
                         var jsonResponse = JsonConvert.DeserializeObject<Dictionary<string, object>>(result);
 
                         if (jsonResponse.ContainsKey("extraction_id"))
@@ -128,7 +133,6 @@ public class ApiClientService
     {
         try
         {
-            Console.WriteLine($"📡 DEBUG: Demande des fichiers CSV avec extraction ID: {extractionId}");
 
             // 🔹 1. Récupérer la liste des fichiers disponibles
             string apiUrl = $"{_baseUrl}get-extraction-files/{extractionId}/";
@@ -177,8 +181,6 @@ public class ApiClientService
                 {
                     await fileResponse.Content.CopyToAsync(fs);
                 }
-
-                Console.WriteLine($"✅ Fichier CSV téléchargé localement : {localPath}");
             }
 
             return remoteFileList;

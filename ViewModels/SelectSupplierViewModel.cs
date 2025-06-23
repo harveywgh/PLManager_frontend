@@ -86,6 +86,7 @@ namespace WPFModernVerticalMenu.ViewModels
                 new SupplierModel { Index = 16, Name = "Mosqueta", Code = "Mosqueta" },
                 new SupplierModel { Index = 17, Name = "Pirona", Code = "Pirona" },
                 new SupplierModel { Index = 18, Name = "Hefei", Code = "Hefei" },
+                new SupplierModel { Index = 19, Name = "Sasini", Code = "Sasini" },
             };
 
             FilteredSuppliers = new ObservableCollection<SupplierModel>(SupplierList);
@@ -103,17 +104,10 @@ namespace WPFModernVerticalMenu.ViewModels
         private void ExecuteConfirmAndNavigate()
         {
             ConfirmSupplier();
-
-            // Ajout d'un log pour vérifier ce qui est enregistré
-            Console.WriteLine($"📌 DEBUG: Avant navigation -> Fournisseur: {AppState.Instance.SelectedSupplier?.Name ?? "NULL"}");
-
             if (AppState.Instance.SelectedSupplier == null || string.IsNullOrEmpty(AppState.Instance.SelectedFile))
             {
-                Console.WriteLine("❌ Navigation annulée : aucun fournisseur ou fichier sélectionné !");
                 return;
             }
-
-            Console.WriteLine("📄 Navigation vers la page des paramètres CSV...");
 
             if (Application.Current.MainWindow is MainWindow mainWindow)
             {
@@ -125,12 +119,8 @@ namespace WPFModernVerticalMenu.ViewModels
         {
             if (SelectedSupplier == null)
             {
-                UpdateStatus("❌ Aucun fournisseur sélectionné.", "Red");
-                Console.WriteLine("❌ ERREUR: Aucun fournisseur sélectionné !");
                 return;
             }
-
-            Console.WriteLine($"📦 Fournisseur sélectionné : {SelectedSupplier.Name}");
             AppState.Instance.SetSelectedSupplier(SelectedSupplier);
 
             // ✅ Ajout d’un log pour confirmer l'enregistrement

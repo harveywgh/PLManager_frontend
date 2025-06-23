@@ -32,8 +32,6 @@ namespace WPFModernVerticalMenu.Services
                 Console.WriteLine("❌ Le fichier est utilisé par un autre processus.");
                 return;
             }
-
-            Console.WriteLine($"?? Enregistrement du fichier sélectionné : {file}");
             SelectedFile = file;
             OnStateChanged?.Invoke();
         }
@@ -53,7 +51,6 @@ namespace WPFModernVerticalMenu.Services
         public void SetExtractedCsvPath(string path)
         {
             ExtractedCsvPath = path;
-            Console.WriteLine($"✅ Chemin CSV sauvegardé : {ExtractedCsvPath}");
         }
 
         // ✅ Nouvelle méthode pour définir les paramètres CSV
@@ -62,7 +59,6 @@ namespace WPFModernVerticalMenu.Services
             SelectedCountry = country;
             SelectedForwarder = forwarder;
             SelectedImporter = importer;
-            Console.WriteLine($"📌 DEBUG APPSTATE : Importer={SelectedImporter}");
             SelectedArchive = archive;
             OnStateChanged?.Invoke();
         }
