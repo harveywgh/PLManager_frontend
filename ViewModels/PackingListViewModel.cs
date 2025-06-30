@@ -44,7 +44,6 @@ namespace WPFModernVerticalMenu.ViewModels
             }, () => true);
         }
 
-        // ✅ Vérifie si un fichier est importé
         public bool IsFileUploaded
         {
             get => _isFileUploaded;
@@ -52,7 +51,7 @@ namespace WPFModernVerticalMenu.ViewModels
             {
                 _isFileUploaded = value;
                 OnPropertyChanged(nameof(IsFileUploaded));
-                OnPropertyChanged(nameof(IsFileSelected)); // Active/désactive le bouton de suppression
+                OnPropertyChanged(nameof(IsFileSelected));
             }
         }
 

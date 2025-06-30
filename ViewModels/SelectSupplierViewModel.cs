@@ -87,6 +87,7 @@ namespace WPFModernVerticalMenu.ViewModels
                 new SupplierModel { Index = 17, Name = "Pirona", Code = "Pirona" },
                 new SupplierModel { Index = 18, Name = "Hefei", Code = "Hefei" },
                 new SupplierModel { Index = 19, Name = "Sasini", Code = "Sasini" },
+                new SupplierModel { Index = 20, Name = "Mavuno", Code = "Mavuno" },
             };
 
             FilteredSuppliers = new ObservableCollection<SupplierModel>(SupplierList);
@@ -122,8 +123,6 @@ namespace WPFModernVerticalMenu.ViewModels
                 return;
             }
             AppState.Instance.SetSelectedSupplier(SelectedSupplier);
-
-            // ✅ Ajout d’un log pour confirmer l'enregistrement
             Console.WriteLine($"✅ DEBUG: Fournisseur après enregistrement -> {AppState.Instance.SelectedSupplier?.Name ?? "NULL"}");
         }
 
