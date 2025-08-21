@@ -380,12 +380,10 @@ namespace PLManager.Windows
 
         private async Task SaveToCurrentFileAsync()
         {
-            Console.WriteLine("\n📥 [WPF] Début de SaveToCurrentFile()");
 
             if (csvData == null)
             {
                 MessageBox.Show("Aucune donnée à sauvegarder.");
-                Console.WriteLine("❌ [WPF] Données CSV nulles, annulation.");
                 return;
             }
 
@@ -394,7 +392,6 @@ namespace PLManager.Windows
             try
             {
                 string tempPath = Path.Combine(Path.GetTempPath(), "edited_" + Guid.NewGuid() + ".csv");
-                Console.WriteLine($"📝 [WPF] Sauvegarde temporaire vers : {tempPath}");
 
                 using (var writer = new StreamWriter(tempPath, false, new UTF8Encoding(true)))
                 using (var csv = new CsvWriter(writer, new CsvConfiguration(CultureInfo.InvariantCulture)
@@ -403,16 +400,13 @@ namespace PLManager.Windows
                     NewLine = "\n"
                 }))
                 {
-                    Console.WriteLine("🧾 [WPF] Écriture de l'en-tête...");
                     foreach (DataColumn col in csvData.Columns)
                     {
                         Console.Write(col.ColumnName + "; ");
                         csv.WriteField(col.ColumnName);
                     }
-                    Console.WriteLine();
                     csv.NextRecord();
 
-                    Console.WriteLine("📊 [WPF] Écriture des données...");
                     for (int row = 0; row < csvData.Rows.Count; row++)
                     {
                         string logLine = "";
@@ -422,7 +416,6 @@ namespace PLManager.Windows
                             logLine += $"{val}; ";
                             csv.WriteField(val);
                         }
-                        Console.WriteLine($"➡️ [WPF] Row {row} : {logLine}");
                         csv.NextRecord();
                     }
                 }
@@ -452,18 +445,14 @@ namespace PLManager.Windows
                     }
                 }
 
-                Console.WriteLine($"📤 [WPF] Chemin API cible = {remotePath}");
-
                 using (var content = new MultipartFormDataContent())
                 {
                     content.Add(new StreamContent(File.OpenRead(tempPath)), "file", Path.GetFileName(tempPath));
                     content.Add(new StringContent(remotePath), "csv_path");
 
-                    Console.WriteLine($"🌐 [WPF] PUT vers {_apiClientService.BaseUrl}update-csv/");
                     var response = await _apiClientService.HttpClient.PutAsync($"{_apiClientService.BaseUrl}update-csv/", content);
 
                     string result = await response.Content.ReadAsStringAsync();
-                    Console.WriteLine($"📡 [WPF] Réponse HTTP : {response.StatusCode} | Contenu : {result}");
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -476,12 +465,10 @@ namespace PLManager.Windows
                 }
 
                 File.Delete(tempPath);
-                Console.WriteLine("🧹 [WPF] Fichier temporaire supprimé.");
             }
             catch (Exception ex)
             {
                 MessageBox.Show("❌ Exception lors de la sauvegarde : " + ex.Message);
-                Console.WriteLine($"🔥 [WPF] Exception : {ex}");
             }
         }
 
@@ -489,13 +476,11 @@ namespace PLManager.Windows
         {
             try
             {
-                Console.WriteLine($"🌍 Requête pour téléchargement distant : {csvPath}");
 
                 using (Stream stream = await _apiClientService.DownloadFileAsStreamAsync(csvPath))
                 {
                     LoadCsvFile(stream);
                     Title = $"Éditeur CSV - {System.IO.Path.GetFileName(csvPath)}";
-                    Console.WriteLine("✅ Fichier chargé depuis l'API sans fichier temporaire.");
                 }
             }
             catch (Exception ex)

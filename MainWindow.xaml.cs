@@ -119,7 +119,7 @@ namespace WPFModernVerticalMenu
         // MouseEnter Events
         private void btnHome_MouseEnter(object sender, MouseEventArgs e) => ShowPopup(btnHome, "Tableau de bord");
         private void btnDashboard_MouseEnter(object sender, MouseEventArgs e) => ShowPopup(btnDashboard, "Extracteur PL");
-        private void btnLocalEditor_MouseEnter(object sender, MouseEventArgs e) => ShowPopup(btnLocalEditor, "Éditeur Local");
+        private void btnLocalEditor_MouseEnter(object sender, MouseEventArgs e) => ShowPopup(btnLocalEditor, "Éditeur CSV");
         private void btnProductStock_MouseEnter(object sender, MouseEventArgs e) => ShowPopup(btnProductStock, "Réglages");
         private void btnOrderList_MouseEnter(object sender, MouseEventArgs e) => ShowPopup(btnOrderList, "Aide");
         private void btnApiStatus_MouseEnter(object sender, MouseEventArgs e)

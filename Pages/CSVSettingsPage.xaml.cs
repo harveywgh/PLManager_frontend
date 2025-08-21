@@ -34,7 +34,7 @@ namespace PLManager.Pages
             DataContext = this; 
 
             // ✅ Initialisation des listes dynamiques
-            CountryList = new List<string> { "ZA", "BR", "MA", "PE", "EG", "US", "IN", "ZW", "KE", "UY", "CO" };           ForwarderList = new List<string> { "COOL CONTROL", "VDH", "LBP", "SEALOGIS", "GATE 4 EU"};
+            CountryList = new List<string> { "ZA", "BR", "MA", "PE", "EG", "US", "IN", "ZW", "KE", "UY", "CO" };           ForwarderList = new List<string> { "COOL CONTROL", "VDH", "LBP", "SEALOGIS", "GATE 4 EU", "PRIMEVER"};
             ImporterList = new List<string> { };
             ArchiveList = new List<string> { };
 
@@ -50,7 +50,6 @@ namespace PLManager.Pages
             if (cbCountry.SelectedItem != null)
             {
                 string selectedCountry = cbCountry.SelectedItem.ToString();
-                Console.WriteLine($"📌 Pays sélectionné : {selectedCountry}");
 
                 AppState.Instance.SetCSVSettings(
                     selectedCountry,
@@ -68,7 +67,6 @@ namespace PLManager.Pages
             if (cbForwarder.SelectedItem != null)
             {
                 string selectedForwarder = cbForwarder.SelectedItem.ToString();
-                Console.WriteLine($"📌 Transitaire sélectionné : {selectedForwarder}");
 
                 AppState.Instance.SetCSVSettings(
                     AppState.Instance.SelectedCountry,
@@ -85,7 +83,6 @@ namespace PLManager.Pages
             if (cbImporter.SelectedItem != null)
             {
                 string importer = cbImporter.SelectedItem.ToString();
-                Console.WriteLine($"📌 Importateur sélectionné : {importer}");
 
                 AppState.Instance.SetCSVSettings(
                     AppState.Instance.SelectedCountry,
@@ -103,7 +100,6 @@ namespace PLManager.Pages
             if (cbArchive.SelectedItem != null)
             {
                 string archive = cbArchive.SelectedItem.ToString();
-                Console.WriteLine($"📌 Archivage sélectionné : {archive}");
 
                 AppState.Instance.SetCSVSettings(
                     AppState.Instance.SelectedCountry,
@@ -121,7 +117,6 @@ namespace PLManager.Pages
         {
             if (cbPackaging.SelectedItem != null)
             {
-                Console.WriteLine($"📌 Packaging sélectionné : {cbPackaging.SelectedItem}");
                 ValidateForm();
             }
         }
@@ -130,7 +125,6 @@ namespace PLManager.Pages
         {
             if (cbPackagingType.SelectedItem != null)
             {
-                Console.WriteLine($"📌 Type de Packaging sélectionné : {cbPackagingType.SelectedItem}");
                 ValidateForm();
             }
         }
@@ -139,7 +133,6 @@ namespace PLManager.Pages
         {
             if (cbCustom1.SelectedItem != null)
             {
-                Console.WriteLine($"📌 Paramètre 1 sélectionné : {cbCustom1.SelectedItem}");
                 ValidateForm();
             }
         }
@@ -148,7 +141,6 @@ namespace PLManager.Pages
         {
             if (cbCustom2.SelectedItem != null)
             {
-                Console.WriteLine($"📌 Paramètre 2 sélectionné : {cbCustom2.SelectedItem}");
                 ValidateForm();
             }
         }
@@ -189,9 +181,6 @@ namespace PLManager.Pages
                 string forwarder = cbForwarder.SelectedItem?.ToString() ?? throw new Exception("Le transitaire est obligatoire !");
                 string importer = cbImporter.SelectedItem?.ToString() ?? "";  
                 string archive = cbArchive.SelectedItem?.ToString() ?? "";  
-
-
-                Console.WriteLine($"📌 DEBUG AVANT ENVOI : Country={country}, Forwarder={forwarder}, Importer={importer}, Archive={archive}");
 
                 string packaging = cbPackaging.SelectedItem?.ToString() ?? "Non spécifié";
                 string packagingType = cbPackagingType.SelectedItem?.ToString() ?? "Non spécifié";

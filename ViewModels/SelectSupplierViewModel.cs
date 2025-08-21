@@ -86,6 +86,18 @@ namespace WPFModernVerticalMenu.ViewModels
                 new SupplierModel { Index = 16, Name = "Mosqueta", Code = "Mosqueta" },
                 new SupplierModel { Index = 17, Name = "Pirona", Code = "Pirona" },
                 new SupplierModel { Index = 18, Name = "Hefei", Code = "Hefei" },
+                new SupplierModel { Index = 19, Name = "Sasini", Code = "Sasini" },
+                new SupplierModel { Index = 20, Name = "Kakuzi", Code = "Kakuzi" },
+                new SupplierModel { Index = 21, Name = "Jorie", Code = "Jorie" },
+                new SupplierModel { Index = 22, Name = "Mavuno", Code = "Mavuno" },
+                new SupplierModel { Index = 23, Name = "Viru", Code = "Viru" },
+                new SupplierModel { Index = 24, Name = "Exportadora Fruticola Athos V2", Code = "Exportadora Fruticola Athos V2" },
+                new SupplierModel { Index = 25, Name = "HNP", Code = "HNP" },
+                new SupplierModel { Index = 26, Name = "Swellen", Code = "Swellen" },
+                new SupplierModel { Index = 27, Name = "Shalimar", Code = "Shalimar" },
+                new SupplierModel { Index = 28, Name = "Ingophase", Code = "Ingophase" },
+                new SupplierModel { Index = 29, Name = "Avaleza", Code = "Avaleza" },
+                new SupplierModel { Index = 30, Name = "Mountain Avocado", Code = "Mountain Avocado" },
             };
 
             FilteredSuppliers = new ObservableCollection<SupplierModel>(SupplierList);
@@ -103,17 +115,10 @@ namespace WPFModernVerticalMenu.ViewModels
         private void ExecuteConfirmAndNavigate()
         {
             ConfirmSupplier();
-
-            // Ajout d'un log pour vérifier ce qui est enregistré
-            Console.WriteLine($"📌 DEBUG: Avant navigation -> Fournisseur: {AppState.Instance.SelectedSupplier?.Name ?? "NULL"}");
-
             if (AppState.Instance.SelectedSupplier == null || string.IsNullOrEmpty(AppState.Instance.SelectedFile))
             {
-                Console.WriteLine("❌ Navigation annulée : aucun fournisseur ou fichier sélectionné !");
                 return;
             }
-
-            Console.WriteLine("📄 Navigation vers la page des paramètres CSV...");
 
             if (Application.Current.MainWindow is MainWindow mainWindow)
             {
@@ -125,15 +130,9 @@ namespace WPFModernVerticalMenu.ViewModels
         {
             if (SelectedSupplier == null)
             {
-                UpdateStatus("❌ Aucun fournisseur sélectionné.", "Red");
-                Console.WriteLine("❌ ERREUR: Aucun fournisseur sélectionné !");
                 return;
             }
-
-            Console.WriteLine($"📦 Fournisseur sélectionné : {SelectedSupplier.Name}");
             AppState.Instance.SetSelectedSupplier(SelectedSupplier);
-
-            // ✅ Ajout d’un log pour confirmer l'enregistrement
             Console.WriteLine($"✅ DEBUG: Fournisseur après enregistrement -> {AppState.Instance.SelectedSupplier?.Name ?? "NULL"}");
         }
 

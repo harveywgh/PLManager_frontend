@@ -15,6 +15,7 @@ namespace WPFModernVerticalMenu.Pages
         private bool _isLoading = true;
         private bool _isSuccess = false;
         private bool _isError = false;
+        private string _errorMessageText;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -45,6 +46,16 @@ namespace WPFModernVerticalMenu.Pages
             {
                 _isError = value;
                 OnPropertyChanged(nameof(IsError));
+            }
+        }
+
+        public string ErrorMessageText
+        {
+            get => _errorMessageText;
+            set
+            {
+                _errorMessageText = value;
+                OnPropertyChanged(nameof(ErrorMessageText));
             }
         }
 
@@ -90,7 +101,8 @@ namespace WPFModernVerticalMenu.Pages
                 ErrorGrid.Visibility = Visibility.Visible;
 
                 // Optionnel : log ou afficher le message quelque part
-                Console.WriteLine("❌ ERREUR : " + message);
+                ErrorMessageText = message ?? "Une erreur est survenue pendant l'extraction.";
+                Console.WriteLine("ERREUR : " + ErrorMessageText);
             });
         }
 
@@ -111,7 +123,7 @@ namespace WPFModernVerticalMenu.Pages
 
                 if (string.IsNullOrWhiteSpace(remotePath) || remotePath.Contains(":\\"))
                 {
-                    MessageBox.Show("❌ Chemin API invalide : chemin local détecté au lieu d’un chemin distant (outputs/...).", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Chemin API invalide : chemin local détecté au lieu d’un chemin distant (outputs/...).", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 

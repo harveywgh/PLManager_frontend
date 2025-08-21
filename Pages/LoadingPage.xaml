@@ -104,10 +104,11 @@
                         </Viewbox>
 
                         <!-- ❌ Message d'erreur -->
-                        <TextBlock Text="Une erreur est survenue pendant l'extraction."
-                   FontSize="16" FontWeight="Bold"
-                   Foreground="#E74C3C" Margin="10,20,10,10"
-                   TextAlignment="Center" TextWrapping="Wrap"/>
+                        <TextBlock Text="{Binding ErrorMessageText}"
+                                   FontSize="16" FontWeight="Bold"
+                                   Foreground="#E74C3C" Margin="10,20,10,10"
+                                   TextAlignment="Center" TextWrapping="Wrap"/>
+
 
                         <!-- 🔁 Bouton Retour -->
                         <Button Content="Retour"
