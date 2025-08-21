@@ -87,7 +87,17 @@ namespace WPFModernVerticalMenu.ViewModels
                 new SupplierModel { Index = 17, Name = "Pirona", Code = "Pirona" },
                 new SupplierModel { Index = 18, Name = "Hefei", Code = "Hefei" },
                 new SupplierModel { Index = 19, Name = "Sasini", Code = "Sasini" },
-                new SupplierModel { Index = 20, Name = "Mavuno", Code = "Mavuno" },
+                new SupplierModel { Index = 20, Name = "Kakuzi", Code = "Kakuzi" },
+                new SupplierModel { Index = 21, Name = "Jorie", Code = "Jorie" },
+                new SupplierModel { Index = 22, Name = "Mavuno", Code = "Mavuno" },
+                new SupplierModel { Index = 23, Name = "Viru", Code = "Viru" },
+                new SupplierModel { Index = 24, Name = "Exportadora Fruticola Athos V2", Code = "Exportadora Fruticola Athos V2" },
+                new SupplierModel { Index = 25, Name = "HNP", Code = "HNP" },
+                new SupplierModel { Index = 26, Name = "Swellen", Code = "Swellen" },
+                new SupplierModel { Index = 27, Name = "Shalimar", Code = "Shalimar" },
+                new SupplierModel { Index = 28, Name = "Ingophase", Code = "Ingophase" },
+                new SupplierModel { Index = 29, Name = "Avaleza", Code = "Avaleza" },
+                new SupplierModel { Index = 30, Name = "Mountain Avocado", Code = "Mountain Avocado" },
             };
 
             FilteredSuppliers = new ObservableCollection<SupplierModel>(SupplierList);

@@ -15,7 +15,7 @@ namespace WPFModernVerticalMenu.Services
         //localhost = http://127.0.0.1:8000/api/
         //NAS = http://192.168.1.2:8890/api/
 
-        public string BaseApiUrl { get; } = "http://127.0.0.1:8000/api/";
+        public string BaseApiUrl { get; } = "http://192.168.1.2:8890/api/";
 
         public event Action<string, SolidColorBrush> ApiStatusChanged;
 
