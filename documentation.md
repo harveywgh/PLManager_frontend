@@ -826,6 +826,5 @@ Cette documentation fournit tout le nécessaire pour maintenir et faire évoluer
 
 ---
 
-**Documentation PLManager Frontend v1.0.0**  
-*Dernière mise à jour : [Date actuelle]*  
+**Documentation PLManager Frontend v1.0.0**
 *Équipe PLManager*
